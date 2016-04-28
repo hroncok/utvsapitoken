@@ -8,3 +8,12 @@ install:
 - pip install requests pytest
 script:
 - py.test -v
+deploy:
+  provider: pypi
+  user: hroncok
+  password:
+    secure: opSVX/dlVfh30qgvVkoqGFUEV4K1Ohu9lBhako3OoHKUbsF7JpVQI/SXWIFk704Fm4APeD31OZ3KtvkxkuzLqzMkJW/Qdd6EFPU5Y+10/1KdXQrRm+SdmqBxDwBEqcRqEJSW0QZy4gpUuUftBBfWQEbGGd7o7Nh9QNJQgDgVvhC1soDm3JZkHe5W6a+NW/YHBssC9qo39G0m/hdkYrT+fkjscYfkm0vFU/iY4iNUWq5dml59V03kpgvSYlcuMq3h6lygmdn50jEucwJ9/LAJ48ofuRYvcFot8BidX07PoF77JayxvodBjrUodTS2ctlLPJbmc2Vr2ZaCvUodBEKgoW5JwFxrvPAl+R1k0DWmKiEOgud9jCPaMMn+PSNavlmLO2w9GV3WYMOSNUUiW1OybGs4nOfEsQKwE7TWB2AwFewYSVoWCn3YxoudP1cWPwoehkY77aYF0yyDT/0thNfzvjY5NzQ7w/IgzEtHT75S/zjRNraERPiOuWmLyQ6ylctN2CQloc6utSQA9pZEjpGMSEYLrDcwEOe9KPqpMGEwEkUarWVikgNyC29ikbu3TPpVbpYSxl/53MIsDe+EXFyPpn9dIoinWwextMotUurb13bwLd/lCJbDLdPJGh3AweOwii+JhoQvIGvhwsgTaFdGeLImEz7K5KPLJDOAqPzNahs=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: hroncok/utvsapitoken
