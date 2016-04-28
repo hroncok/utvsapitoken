@@ -31,7 +31,7 @@ class TokenHandler(http.server.SimpleHTTPRequestHandler):
             'scope': scope,
         }
         try:
-            data['user_name'] = itoken
+            data['user_name'] = str(itoken)
         except NameError:
             pass
         return data
