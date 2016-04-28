@@ -1,3 +1,4 @@
+import time
 import threading
 
 import pytest
@@ -8,15 +9,18 @@ from utvsapitoken.fakeserver import serve_forever
 
 
 class TestClient:
-    def setup_method(self, method):
+    @classmethod
+    def setup_class(cls):
         p = pytest.config.getoption('--port')
 
         t = threading.Thread(target=serve_forever, args=[int(p)])
         t.daemon = True
         t.start()
 
-        self.tc = TokenClient(check_token_uri='http://localhost:%s/token' % p,
-                              usermap_uri='http://localhost:%s/user' % p)
+        time.sleep(1)
+
+        cls.tc = TokenClient(check_token_uri='http://localhost:%s/token' % p,
+                             usermap_uri='http://localhost:%s/user' % p)
 
     def test_fake_token_number(self, port):
         info = self.tc.token_to_info('12345')
