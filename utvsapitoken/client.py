@@ -16,7 +16,7 @@ class TokenClient:
             'https://kosapi.fit.cvut.cz/usermap/v1/people'
 
     @classmethod
-    def raise_if_error(cls, info, e):
+    def _raise_if_error(cls, info, e):
         if 'error' in info:
             msg = info['error']
             if 'error_description' in info:
@@ -27,22 +27,22 @@ class TokenClient:
         '''For given token, produces an info dict'''
         r = requests.get(self.turi, {'token': token})
         info = json.loads(r.text)
-        self.raise_if_error(info, TokenInvalid)
+        self._raise_if_error(info, TokenInvalid)
         if info['exp'] <= time.time():
             raise TokenExpired('Token is expired')
 
         if 'user_name' in info:
-            pnum = self.pnum_from_username(info['user_name'], token)
+            pnum = self._pnum_from_username(info['user_name'], token)
             if pnum:
                 info.update({'personal_number': pnum})
 
         return info
 
-    def pnum_from_username(self, username, token):
+    def _pnum_from_username(self, username, token):
         r = requests.get(self.uuri + '/' + username,
                          headers={'Authorization': 'Bearer %s' % token})
         info = json.loads(r.text)
-        self.raise_if_error(info, UsermapError)
+        self._raise_if_error(info, UsermapError)
         try:
             return info['personalNumber']
         except KeyError:
