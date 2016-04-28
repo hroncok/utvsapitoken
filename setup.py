@@ -13,6 +13,8 @@ setup(
     license='MIT',
     url='https://github.com/hroncok/utvsapitoken',
     packages=find_packages(),
+    install_requires=['requests'],
+    tests_require=['pytest'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
