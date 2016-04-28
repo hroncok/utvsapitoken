@@ -1,5 +1,6 @@
 import http.server
 import json
+import socket
 import socketserver
 import time
 
@@ -64,6 +65,15 @@ class TokenHandler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write(json.dumps(data).encode())
 
 
+class TCPServer(socketserver.TCPServer):
+    '''
+    Our server with custom server_bind()
+    '''
+    def server_bind(self):
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.socket.bind(self.server_address)
+
+
 def serve_forever(port=8080):
-    tokenserver = socketserver.TCPServer(('', port), TokenHandler)
+    tokenserver = TCPServer(('', port), TokenHandler)
     tokenserver.serve_forever()
