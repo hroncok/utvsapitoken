@@ -5,6 +5,9 @@ import socketserver
 import time
 
 
+TNUM = 666
+
+
 class TokenHandler(http.server.SimpleHTTPRequestHandler):
     def fake_token_info(self, token):
         '''
@@ -19,7 +22,9 @@ class TokenHandler(http.server.SimpleHTTPRequestHandler):
         scope = ['cvut:utvs:general:read']
         try:
             itoken = int(token)
-            scope += ['cvut:utvs:enrollments:by-role']
+            scope += ['cvut:utvs:enrollments:personal']
+            if itoken == TNUM:
+                scope += ['cvut:utvs:enrollments:by-role']
         except ValueError:
             if token == 'GODGODGOD':
                 scope += ['cvut:utvs:enrollments:all']
@@ -45,6 +50,9 @@ class TokenHandler(http.server.SimpleHTTPRequestHandler):
         try:
             pnum = int(username)
             data['personalNumber'] = pnum
+            data['roles'] = ['dummyrole']
+            if pnum == TNUM:
+                data['roles'].append('B-00000-ZAMESTNANEC')
         except ValueError:
             pass
         return data
