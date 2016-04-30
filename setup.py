@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='utvsapitoken',
-    version='0.0.1',
+    version='0.0.2',
     description='OAuth2 token validation for UTVS API',
     long_description=''.join(open('README.rst').readlines()),
     keywords='oauth2',
