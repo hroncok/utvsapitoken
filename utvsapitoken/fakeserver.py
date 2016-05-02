@@ -14,6 +14,8 @@ class TokenHandler(http.server.SimpleHTTPRequestHandler):
         If the token is a number, it will pretend
         the token is valid and belongs to an user with such personal number.
 
+        If the number is TNUM, it will pretend it's a employee.
+
         If the token is GODGODGOD, it will pretend the token is valid
         and belongs to a client that can read everything.
 
