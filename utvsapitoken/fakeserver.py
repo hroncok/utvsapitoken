@@ -75,7 +75,7 @@ class TokenHandler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write(json.dumps(data).encode())
 
 
-class TCPServer(socketserver.TCPServer):
+class TCPServer(socketserver.ForkingTCPServer):
     '''
     Our server with custom server_bind()
     '''
